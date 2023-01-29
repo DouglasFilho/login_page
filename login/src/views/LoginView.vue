@@ -2,20 +2,27 @@
     <div class="container">
         <div class="loginDiv">
             <p class="welcome">Welcome back!</p>
-            <!--eslint-disable-next-line-->
-            <input type="text" placeholder="Username">
-            <br>
+            <div style="display:block">
+                <!--eslint-disable-next-line-->
+                <input type="text" placeholder="Username">
+            </div>
 
-            <!--eslint-disable-next-line-->
-            <input :type="passwordType" placeholder="Password">
-            <i class="fa fa-key icon"></i>
-            <br>
-            <button @click="logIn()">Log in</button>
-            <br>
-            <!--eslint-disable-next-line-->
-            <span class="forgotText" @click="forgotPassword()">Forgot password?</span>
-            <br>
+            <div style="display:block">
+                <!--eslint-disable-next-line-->
+                <input :type="passwordType" placeholder="Password">
+            </div>
+
+            <div style="display:block">
+                <button @click="logIn()">Log in</button>
+            </div>
+
+            <div style="display:block">
+                <!--eslint-disable-next-line-->
+                <span class="forgotText" @click="forgotPassword()">Forgot password?</span>
+            </div>
+
             <div class="divider"></div>
+
             <span class="singUpText">
                 <!--eslint-disable-next-line-->
                 Don't have a account? <strong @click="singUp()">Sing-up</strong>
