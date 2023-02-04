@@ -1,60 +1,159 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="container">
+      <div class="loginDiv">
+          <p class="title">Welcome back!</p>
+          <div style="display:block">
+              <!--eslint-disable-next-line-->
+              <input v-model="email" type="text" placeholder="Email">
+          </div>
+
+          <div style="display:block">
+              <!--eslint-disable-next-line-->
+              <input v-model="password" :type="passwordType" placeholder="Password">
+          </div>
+
+          <div style="display:block">
+              <button @click="logIn()" @keyup.enter="enterHandler">Log in</button>
+          </div>
+
+          <div style="display:block">
+              <!--eslint-disable-next-line-->
+              <span class="forgotText" @click="forgotPassword()">Forgot password?</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <span class="singUpText">
+              <!--eslint-disable-next-line-->
+              Don't have a account? <strong @click="singUp()">Sing-up</strong>
+          </span>
+      </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
+  name: 'LoginView',
+  components: { },
+  data() {
+    return {
+      passwordType: 'password',
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    singUp() {
+      alert('sing up');
+    },
+    logIn() {
+      const user = this.users.filter((el) => {
+        if (el.email === this.email) return true;
+        return false;
+      });
+
+      if (user.length > 0) {
+        if (user[0].password === this.password) {
+          alert('usuario logado com sucesso');
+        } else {
+          alert('senha incorreta');
+        }
+      } else {
+        alert('usuario nao encontrado');
+      }
+    },
+    forgotPassword() {
+      alert('forgotPassword');
+    },
+    keyUpHandler(event) {
+      if (event.key === 'Enter') {
+        this.logIn();
+      }
+    },
+  },
+  computed: {
+    users() {
+      return this.$store.getters.getUsers;
+    },
+  },
+  mounted() {
+    document.addEventListener('keyup', this.keyUpHandler);
+  },
+  beforeUnmount() {
+    document.removeEventListener('keyup', this.keyUpHandler);
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+  .container {
+      background-color: #3C79F5;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .loginDiv{
+      background-color: #FFFFFF;
+      width: 350px;
+      height: 330px;
+      border-radius: 3%;
+  }
+
+  .title{
+      font-size: 30px;
+      color: #3C79F5;
+  }
+
+  body {
+      margin: 0px;
+  }
+
+  input[type="text"], input[type="password"]{
+      width: 60%;
+      padding: 10px 20px;
+      margin-bottom: 8px;
+      border: 1px solid #3C79F5;
+      border-radius: 4px;
+      display: inline-block;
+  }
+
+  button{
+      width: 72%;
+      padding: 10px 20px;
+      margin-bottom: 4px;
+      border: none;
+      border-radius: 4px;
+      background-color: #3C79F5;
+      color: #FFFFFF;
+  }
+
+  .forgotText{
+      float: left;
+      margin-left: 50px;
+      font-size: 10px;
+      color: #878F9F;
+      display: inherit;
+  }
+
+  .singUpText{
+      display: inline-block;
+      color: #878F9F;
+      font-size: 10px;
+  }
+
+  .divider{
+      display: inline-block;
+      width: 70%;
+      background-color: #3C79F5;
+      height: 1px;
+      margin-top: 20px;
+  }
+
+  input:focus{
+      outline: none;
+  }
 </style>

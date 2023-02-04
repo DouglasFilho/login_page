@@ -1,10 +1,15 @@
 <template>
     <div class="container">
         <div class="loginDiv">
-            <p class="title">Welcome back!</p>
+            <p class="title">Create Account</p>
             <div style="display:block">
                 <!--eslint-disable-next-line-->
-                <input v-model="email" type="text" placeholder="Email">
+                <input v-model="email" type="text" placeholder="Username">
+            </div>
+
+            <div style="display:block">
+                <!--eslint-disable-next-line-->
+                <input v-model="password" type="text" placeholder="Email">
             </div>
 
             <div style="display:block">
@@ -13,19 +18,14 @@
             </div>
 
             <div style="display:block">
-                <button @click="logIn()" @keyup.enter="enterHandler">Log in</button>
-            </div>
-
-            <div style="display:block">
-                <!--eslint-disable-next-line-->
-                <span class="forgotText" @click="forgotPassword()">Forgot password?</span>
+                <button @click="logIn()" @keyup.enter="enterHandler">Sing up</button>
             </div>
 
             <div class="divider"></div>
 
-            <span class="singUpText">
+            <span class="singUpText" style="display:block; margin-top:4px">
                 <!--eslint-disable-next-line-->
-                Don't have a account? <strong @click="singUp()">Sing-up</strong>
+                Return to <strong @click="singUp()">Home page.</strong>
             </span>
         </div>
     </div>
@@ -87,7 +87,7 @@ export default {
 
 <style>
     .container {
-        background-color: #3C79F5;
+        background: rgb(63,94,251);
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -104,7 +104,7 @@ export default {
     }
 
     .title{
-        font-size: 30px;
+        font-size: 25px;
         color: #3C79F5;
     }
 
@@ -124,7 +124,7 @@ export default {
     button{
         width: 72%;
         padding: 10px 20px;
-        margin-bottom: 4px;
+        margin-top: 15px;
         border: none;
         border-radius: 4px;
         background-color: #3C79F5;
@@ -150,7 +150,7 @@ export default {
         width: 70%;
         background-color: #3C79F5;
         height: 1px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     input:focus{

@@ -7,6 +7,9 @@ export default createStore({
     ],
   },
   getters: {
+    getUsers(state) {
+      return state.users;
+    },
   },
   mutations: {
   },
